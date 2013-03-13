@@ -4,6 +4,7 @@ require 'haml'
 require './lib/sinatra/partials'
 require './lib/sinatra/javascripts'
 require './lib/sinatra/styles'
+require './lib/sinatra/imagecapture'
 
 class AutoExpApp < Sinatra::Base
 
@@ -11,6 +12,7 @@ class AutoExpApp < Sinatra::Base
   helpers Sinatra::Partials
   helpers Sinatra::Javascripts
   helpers Sinatra::Styles
+  helpers Sinatra::ImageCapture
 
   config_file 'config.yml'
 
@@ -18,6 +20,10 @@ class AutoExpApp < Sinatra::Base
 
   get '/' do
     haml :index
+  end
+
+  get '/capture' do
+    get_image "ross"
   end
   
   # run app if file is executed directly
