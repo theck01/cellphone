@@ -1,4 +1,5 @@
-port: 3000
+port: 80
+bind: '130.64.84.73'
 
 javascripts:
   jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'
