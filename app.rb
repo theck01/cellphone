@@ -46,8 +46,8 @@ class AutoExpApp < Sinatra::Base
       #new image capture worker process
       Thread.new do
         while true do
-          img_name = get_image 'test', './imgs'
-          @@img_name = img_name
+          img_name = get_image 'test', './public/assets/imgs'
+          @@img_name = File.basename img_name
         end
       end
 
@@ -57,9 +57,14 @@ class AutoExpApp < Sinatra::Base
     redirect :experiment
   end
 
-  # request most recent image captured from the microscope
+  # request name of most recent image captured from the microscope
   get '/recent_img' do
-    send_file @@img_name
+    content_type :json
+    if @@img_name
+      { path: "assets/imgs/#{@@img_name}" }.to_json
+    else
+      { path: "assets/imgs/placeholder.jpg" }.to_json
+    end
   end
 
   # request dosage and syringe information as json
