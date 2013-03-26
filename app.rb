@@ -22,11 +22,22 @@ class AutoExpApp < Sinatra::Base
   @@img_name = nil
 
 
-  # ROUTES
+  # VISIBLE ROUTES
 
   get '/' do
-    haml :index
+    @page = :index
+    haml :layout
   end
+
+  # observe the experiment currently running
+  get '/experiment' do
+    scripts :experiment
+    @page = :experiment
+    haml :layout
+  end
+
+
+  # API ROUTES
 
   # start experiment, if one is not already running
   get '/begin' do
@@ -44,11 +55,6 @@ class AutoExpApp < Sinatra::Base
     end
 
     redirect :experiment
-  end
-
-  # observe the experiment currently running
-  get '/experiment' do
-    @@img_name
   end
 
   # request most recent image captured from the microscope
