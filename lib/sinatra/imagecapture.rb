@@ -2,9 +2,15 @@ require 'sinatra/base'
 
 module Sinatra
   module ImageCapture
-    def get_image (name="image",path="")
-      image_name = "#{name}#{Date.to_s}.jpg"
-      image_path = "#{IMAGE_PATH}/#{image_name}"
+    def get_image (name="image",path=".")
+
+      # drop final / in path if it exists
+      path = path[0..-2] if path[-1] == '/'
+
+      image_name = "#{name}#{DateTime.now.strftime("_%Hh%Mm%Ss_%b-%d-%Y")}.jpg"
+      image_path = "#{path}/#{image_name}"
+
+      # run image capture program
       `lib/TWAINCom #{image_path} -fjpg -grayscale -h -o`
       image_path
     end
