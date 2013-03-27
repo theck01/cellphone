@@ -6,6 +6,7 @@ gem 'json'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
+gem 'sqlite3'
 gem 'thin'
 
 group :development do

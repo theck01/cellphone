@@ -22,3 +22,4 @@ end
 # load helpers, models, and routes
 require './helpers/init'
 require './routes/init'
+require './models/init'
