@@ -1,7 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
+gem 'activerecord'
 gem 'haml'
-gem 'thin'
-gem 'sinatra-contrib'
 gem 'json'
+gem 'sinatra'
+gem 'sinatra-activerecord'
+gem 'sinatra-contrib'
+gem 'thin'
+
+group :development do
+  gem 'shotgun'
+  gem 'tux'
+end
