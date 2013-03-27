@@ -1,11 +1,5 @@
-port: 80
-bind: '130.64.84.73'
-
 javascripts:
   jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'
 local_javascripts_path: '/assets/javascripts/'
 
 local_stylesheet_path: '/assets/stylesheets/'
-
-
-
