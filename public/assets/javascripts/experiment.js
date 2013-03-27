@@ -11,7 +11,7 @@ $(function () {
     /* request most recent img path from server */
     $.ajax({
       async: false, 
-      url: '/recent_img', 
+      url: '/api/recent_img', 
       dataType: 'json', 
       success: function (data) {
         img_path = data['path'];

@@ -2,77 +2,23 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'haml'
 require 'json'
-require './lib/sinatra/partials'
-require './lib/sinatra/javascripts'
-require './lib/sinatra/styles'
-require './lib/sinatra/imagecapture'
 
 class AutoExpApp < Sinatra::Base
 
   register Sinatra::ConfigFile
-  helpers Sinatra::Partials
-  helpers Sinatra::Javascripts
-  helpers Sinatra::Styles
-  helpers Sinatra::ImageCapture
-
   config_file 'config.yml'
   
   # CLASS STATUS VARIABLES
-  @@exp_running = false
-  @@img_name = nil
+  @@recent_img_name = nil
+  @@img_thread = nil
 
-
-  # VISIBLE ROUTES
-
+  # ROOT ROUTE
   get '/' do
     @page = :index
     haml :layout
   end
-
-  # observe the experiment currently running
-  get '/experiment' do
-    scripts :experiment
-    @page = :experiment
-    haml :layout
-  end
-
-
-  # API ROUTES
-
-  # start experiment, if one is not already running
-  get '/begin' do
-    unless @@exp_running
-
-      #new image capture worker process
-      Thread.new do
-        while true do
-          img_name = get_image 'test', './public/assets/imgs'
-          @@img_name = File.basename img_name
-        end
-      end
-
-      @@exp_running = true
-    end
-
-    redirect :experiment
-  end
-
-  # request name of most recent image captured from the microscope
-  get '/recent_img' do
-    content_type :json
-    if @@img_name
-      { path: "assets/imgs/#{@@img_name}" }.to_json
-    else
-      { path: "assets/imgs/placeholder.jpg" }.to_json
-    end
-  end
-
-  # request dosage and syringe information as json
-  get '/dose' do
-    content_type :json
-    { dose: 1, syringe_size: 10 }.to_json
-  end
-
-  # run app if file is executed directly
-  run! if app_file ==$0
 end
+
+# load helpers, models, and routes
+require './helpers/init'
+require './routes/init'
