@@ -1,5 +1,3 @@
-
-
 class AutoExpApp < Sinatra::Base
 
   # start experiment, if one is not already running
@@ -25,6 +23,3 @@ class AutoExpApp < Sinatra::Base
     haml :layout
   end
 end
-
-
-
