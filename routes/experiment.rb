@@ -11,9 +11,21 @@ class AutoExpApp < Sinatra::Base
           @@recent_img_name = File.basename recent_img_name
         end
       end
+
+      puts "started img thread, has value: #{@@img_thread}"
     end
 
     redirect 'experiment/show'
+  end
+
+  # end the experiment, if one is running
+  get '/experiment/end' do
+    if @@img_thread
+      @@img_thread = @@img_thread.terminate
+      puts "killed thread, has value: #{@@img_thread}"
+    end
+
+    redirect '/'
   end
 
   # observe the experiment currently running
