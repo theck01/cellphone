@@ -8,8 +8,7 @@ class AutoExpApp < Sinatra::Base
 
   # request the histogram of the last saved image
   get '/api/histogram' do
-    content_type :json
-    get_histogram(@@recent_img_name, "./public/assets/imgs/").to_json
+    redirect "http://#{settings.histogrammer_ip}:3000/api/histogram/#{@@recent_img_name}"
   end
 
   # request name of most recent image captured from the microscope

@@ -24,6 +24,7 @@ GEM
     i18n (0.6.1)
     json (1.7.7)
     method_source (0.8.1)
+    mime-types (1.22)
     multi_json (1.7.2)
     pry (0.9.12)
       coderay (~> 1.0.5)
@@ -34,6 +35,8 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     ripl (0.7.0)
       bond (~> 0.4.2)
     ripl-multi_line (0.3.0)
@@ -79,6 +82,7 @@ DEPENDENCIES
   haml
   json
   pry
+  rest-client
   rmagick
   sinatra
   sinatra-activerecord

@@ -3,3 +3,5 @@ javascripts:
 local_javascripts_path: '/assets/javascripts/'
 
 local_stylesheet_path: '/assets/stylesheets/'
+
+histogrammer_ip: '130.64.84.73'
