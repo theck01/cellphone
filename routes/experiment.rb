@@ -1,7 +1,18 @@
 class AutoExpApp < Sinatra::Base
 
+  # render the setup page
+  get '/experiment/setup' do
+    scripts :experiment_setup
+    @page = 'experiment/setup'
+    haml :layout
+  end
+
+  post '/experiment/form_test' do
+    params.to_s
+  end
+
   # start experiment, if one is not already running
-  get '/experiment/begin' do
+  post '/experiment/begin' do
     unless @@img_thread
 
       #new image capture worker process
@@ -11,8 +22,6 @@ class AutoExpApp < Sinatra::Base
           @@recent_img_name = File.basename recent_img_name
         end
       end
-
-      puts "started img thread, has value: #{@@img_thread}"
     end
 
     redirect 'experiment/show'
@@ -21,8 +30,8 @@ class AutoExpApp < Sinatra::Base
   # end the experiment, if one is running
   get '/experiment/end' do
     if @@img_thread
-      @@img_thread = @@img_thread.terminate
-      puts "killed thread, has value: #{@@img_thread}"
+      @@img_thread.terminate
+      @@img_thread = nil
     end
 
     redirect '/'
@@ -30,7 +39,7 @@ class AutoExpApp < Sinatra::Base
 
   # observe the experiment currently running
   get '/experiment/show' do
-    scripts :experiment
+    scripts :experiment_show
     @page = 'experiment/show'
     haml :layout
   end
