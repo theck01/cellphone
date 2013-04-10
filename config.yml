@@ -2,6 +2,10 @@ javascripts:
   jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'
 local_javascripts_path: '/assets/javascripts/'
 
+stylesheets:
+  unsemantic: '/assets/stylesheets/unsemantic-grid-responsive.css'
+  roboto_font: 'http://fonts.googleapis.com/css?family=Roboto+Condensed'
+  application: '/assets/stylesheets/application.css'
 local_stylesheet_path: '/assets/stylesheets/'
 
 histogrammer_ip: '130.64.84.73'

@@ -3,6 +3,7 @@ class AutoExpApp < Sinatra::Base
   # render the setup page
   get '/experiment/setup' do
     scripts :experiment_setup
+    styles :experiment_setup
     @page = 'experiment/setup'
     haml :layout
   end
