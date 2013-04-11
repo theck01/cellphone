@@ -9,7 +9,7 @@ class AutoExpApp < Sinatra::Base
   config_file 'config.yml'
   
   # SERVER STATE VARIABLES
-  @@recent_img_name = 'placeholder.jpg'
+  @@recent_img_name = '.placeholder.jpg'
   @@img_thread = nil
 
   # ROOT ROUTE

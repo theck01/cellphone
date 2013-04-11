@@ -42,6 +42,7 @@ class AutoExpApp < Sinatra::Base
   get '/experiment/show' do
     scripts :experiment_show
     @page = 'experiment/show'
+    @start_img = @@recent_img_name
     haml :layout
   end
 end
