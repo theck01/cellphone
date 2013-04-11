@@ -1,42 +1,45 @@
-%h2#title.grid-100.mobile-grid-100{ align: 'center' } Experiment Setup
+#setup_parent.grid-90.prefix-5.suffix-5.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent
 
-%form#settings.grid-90.prefix-5.suffix-5.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent{ action: '/experiment/form_test', method: 'post' }
+  %h2#title.grid-100.mobile-grid-100 Experiment Setup
 
-  #fields.grid-100.mobile-grid-100.grid-parent
+  %form#settings.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/form_test', method: 'post' }
 
-    %span#name_field.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-50.mobile-grid-100 What is your name?
-      %input.small_text.grid-50.mobile-grid-100{ type: 'text', name: 'name' }
+    #fields.grid-100.mobile-grid-100.grid-parent
 
-    %span#experiment_title.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-50.mobile-grid-100 What is the title of your experiment?
-      %input.grid-50.mobile-grid-100.small_text{ type: 'text', name: 'title' }
-    .clear
+      %span#name_field.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 What is your name?
+        %input.small_text.grid-50.mobile-grid-100{ type: 'text', name: 'name' }
 
-    %span#cells_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-50.mobile-grid-100 Are the cells positioned and visible under the microscope?
-      #buttons.grid-50.mobile-grid-100{ align: 'center' }
-        %input.radio{ type: 'radio', name: 'cells', value: true } Yes
-        %input.radio{ type: 'radio', name: 'cells', value: false, checked: true } No
+      %span#experiment_title.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 What is the title of your experiment?
+        %input.grid-50.mobile-grid-100.small_text{ type: 'text', name: 'title' }
+      .clear
+      %br
 
-    %span#dropper_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-50.mobile-grid-100 Is the drug administration dropper placed correctly?
-      #buttons.grid-50.mobile-grid-100.grid-parent{ align: 'center' }
-        %input.radio{ type: 'radio', name: 'dropper', value: true } Yes
-        %input.radio{ type: 'radio', name: 'dropper', value: false, checked: true } No
-    .clear
+      %span#cells_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 Are the cells positioned and visible under the microscope?
+        #buttons.grid-50.mobile-grid-100{ align: 'center' }
+          %input.radio{ type: 'radio', name: 'cells', value: true } Yes
+          %input.radio{ type: 'radio', name: 'cells', value: false, checked: true } No
 
-    #experiment_description.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-100.mobile-grid-100
-        Please provide a brief description of the experiment
-      %input.large_text.grid-100.mobile-grid-100{ type: 'text', name: 'description' }
+      %span#dropper_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 Is the drug administration dropper placed correctly?
+        #buttons.grid-50.mobile-grid-100.grid-parent{ align: 'center' }
+          %input.radio{ type: 'radio', name: 'dropper', value: true } Yes
+          %input.radio{ type: 'radio', name: 'dropper', value: false, checked: true } No
+      .clear
 
-    #experiment_expectations.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %label.grid-100.mobile-grid-100
-        What do you expect to see happen in this experiment?
-      %input.large_text.grid-100.mobile-grid-100{ type: 'text', name: 'expectations' }
-    .clear
-  %br 
-  #submit_settings.grid-100.mobile-grid-100{ align: 'center' }
-    %input.button.startbutton{ type: 'submit', value: "Save", disabled: true }
+      #experiment_description.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-100.mobile-grid-100
+          Please provide a brief description of the experiment
+        %input.large_text.grid-100.mobile-grid-100{ type: 'text', name: 'description' }
+
+      #experiment_expectations.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-100.mobile-grid-100
+          What do you expect to see happen in this experiment?
+        %input.large_text.grid-100.mobile-grid-100{ type: 'text', name: 'expectations' }
+      .clear
+    %br 
+    #submit_settings.grid-100.mobile-grid-100{ align: 'center' }
+      %input.button.startbutton{ type: 'submit', value: "Save" }
 
