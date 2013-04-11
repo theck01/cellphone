@@ -16,17 +16,17 @@
       .clear
       %br
 
-      %span#cells_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 Are the cells positioned and visible under the microscope?
-        #buttons.grid-50.mobile-grid-100{ align: 'center' }
-          %input.radio{ type: 'radio', name: 'cells', value: true } Yes
-          %input.radio{ type: 'radio', name: 'cells', value: false, checked: true } No
 
-      %span#dropper_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 Is the drug administration dropper placed correctly?
-        #buttons.grid-50.mobile-grid-100.grid-parent{ align: 'center' }
-          %input.radio{ type: 'radio', name: 'dropper', value: true } Yes
-          %input.radio{ type: 'radio', name: 'dropper', value: false, checked: true } No
+      %span#dose_field.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 What is the drug dosage in milliters for this experiment?
+        %input.small_text.grid-50.mobile-grid-100{ type: 'text', name: 'name' }
+
+      %span#syringe_field.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 What is the syringe in milliters size being used for this experiment?
+        .grid-50.mobile-grid-100{ align: 'center' }
+          %input.radio{ type: 'radio', name: 'syringe', value: 10 } 10ml
+          %input.radio{ type: 'radio', name: 'syringe', value: 25, checked: true } 25ml
+          %input.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
       .clear
 
       #experiment_description.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
@@ -39,7 +39,22 @@
           What do you expect to see happen in this experiment?
         %input.large_text.grid-100.mobile-grid-100{ type: 'text', name: 'expectations' }
       .clear
-    %br 
+      %br 
+    
+      %span#cells_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 Are the cells positioned and visible under the microscope?
+        .grid-50.mobile-grid-100{ align: 'center' }
+          %input.radio{ type: 'radio', name: 'cells', value: true } Yes
+          %input.radio{ type: 'radio', name: 'cells', value: false, checked: true } No
+
+      %span#dropper_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-50.mobile-grid-100 Is the drug administration dropper placed correctly?
+        .grid-50.mobile-grid-100.grid-parent{ align: 'center' }
+          %input.radio{ type: 'radio', name: 'dropper', value: true } Yes
+          %input.radio{ type: 'radio', name: 'dropper', value: false, checked: true } No
+      .clear
+    %br
+
     #submit_settings.grid-100.mobile-grid-100{ align: 'center' }
       %input.button.startbutton{ type: 'submit', value: "Save" }
 
