@@ -8,79 +8,127 @@ function newArray(value, length) {
   return ary;
 }
 
+
 /* page wide access to most recent chart data */
 var $chart;
+var $cell_img;
+var $cell_img_path;
 var histogram = newArray(0,256);
-var hist_step = 0.025;
+var average_intensity = 128;
+var threshold = 128;
+
+function setThreshold(new_value) {
+  new_value = Math.round(new_value);
+  $.ajax({
+    url: '/api/set_threshold',
+    type: 'PUT',
+    data: { threshold: new_value },
+    success: function (data) {
+      threshold = new_value;
+      updateChart();
+    }
+  });
+}
+
+function sizeChart(){
+  $chart.height($chart.width()*0.75);
+}
 
 
 function updateChart(){
 
-  /* update chart size */
-  $chart.height($histogram.width());
+  x_labels = newArray("", 256);
+  for(var i=0; i<256; i+=50) x_labels[i] = i.toString();
 
-  var context = $chart.get(0).getContext("2d");
-  var new_chart = new Chart(context);
+  $chart.highcharts({
+    chart: { 
+      type: 'column',
+      events: { click: 
+        function (event) {
+          setThreshold(event.xAxis[0].value);
+        }
+      }
+    },
+    plotOptions: { column: {
+      pointPadding: 0, borderWidth:0, groupPadding: 0, shadow: false
+    }},
+    title: { text: 'Fluorescence Intensity' },
+    xAxis: { 
+      categories: x_labels,
+      plotBands: [
+      { 
+        color: 'red', 
+        from : threshold.toString(),
+        to: (threshold+1).toString(),
+        label: { 
+          text: 'Threshold = ' + threshold, 
+          rotation: 270, 
+          x: 15,
+          y: 100
+        }
+      },
+      { 
+        color: 'orange', 
+        from : average_intensity.toString(),
+        to: (average_intensity+1).toString(),
+        label: { 
+          text: 'Average Intensity', 
+          rotation: 270, 
+          x: 15,
+          y: 100
+        }
+      }]
+    },
+    yAxis: { title: { text: "Normalized Intensity" } },
+    series: [{ name: 'Current Image', data: histogram }],
+    legend: { enabled: false }
+  });
+}
 
-  var labels = 
-  var chart_options = {
-    scaleOverride: true,
-    scaleSteps: 10,
-    scaleStepWidth: hist_step,
-    barValueSpacing: 0,
-    barDatasetSpacing: 0,
-  };
 
+function requestData() {
+  var img_path;
 
-  var chart_data = {
-    labels: [],
-    datasets: [{
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,0.5)",
-      data: histogram
-    }]
-  }
+  /* request and update most recent img path from server */
+  $.ajax({
+    async: false, 
+    url: '/api/recent_img', 
+    dataType: 'json', 
+    success: function (data) {
+      img_path = data['path'];
+      $cell_img.attr("src", img_path);
+      $cell_img_path.text(img_path);
+    }
+  });
+
+  /* request and update image histogram from server */
+  $.ajax({
+    async: false, 
+    url: '/api/histogram', 
+    dataType: 'json', 
+    success: function (data) {
+      histogram = data['histogram'];
+      average_intensity = data['average'];
+      updateChart();
+    }
+  });
 }
 
   
 $(function () {
 
-  var $cell_img = $("#cell_img");
-  var $cell_img_path = $("#cell_img_path");
-  var histogram = $("#histogram").get(0)
+  $("#slider").slider({ max: 255, min: 0, step: 1, value: 128 });
+  $chart = $("#chart");
+  $cell_img = $("#cell_img");
+  $cell_img_path = $("#cell_img_path");
 
-  setInterval(function () {
-
-    var img_path;
-
-    /* request and update most recent img path from server */
-    $.ajax({
-      async: false, 
-      url: '/api/recent_img', 
-      dataType: 'json', 
-      success: function (data) {
-        img_path = data['path'];
-        $cell_img.attr("src", img_path);
-        $cell_img_path.text(img_path);
-        console.log('New image: ' + img_path);
-      }
-    });
-
-    /* request and update image histogram from server */
-    $.ajax({
-      async: false, 
-      url: '/api/histogram', 
-      dataType: 'json', 
-      success: function (data) {
-        histogram = data['histogram'];
-
-
-        console.log('Updated chart with data: ' + histogram);
-      }
-    });
-  }, 7500);
+  sizeChart();
+  requestData();
+  setInterval(requestData, 7500);
 });
 
 
-$(window).resize();
-
+$(window).resize(function (event){
+  sizeChart();
+  updateChart();
+});
