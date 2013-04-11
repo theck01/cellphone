@@ -1,4 +1,11 @@
-%img#cell_img(src="/assets/imgs/#{@start_img}")
-%p#cell_img_path
-  = @start_img.to_s
-  
+#experiment_parent.grid-90.prefix-5.suffix-5.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent
+
+  %h2#title.grid-100.mobile-grid-100 Experiment Setup
+
+  #img_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
+    %img#cell_img.grid-100.mobile-grid-100(src="/assets/imgs/#{@start_img}")
+    %p#cell_img_path.grid-100.mobile-grid-100
+      = @start_img.to_s
+
+  #chart_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
+    %canvas#histogram.grid-100.mobile-grid-100{ align: 'center' }
