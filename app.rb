@@ -9,8 +9,12 @@ class AutoExpApp < Sinatra::Base
   config_file 'config.yml'
   
   # SERVER STATE VARIABLES
-  @@recent_img_name = '.placeholder.jpg'
+  @@dose = 5 #ml
+  @@img_prefix = 'test'
   @@img_thread = nil
+  @@recent_img_name = '.placeholder.jpg'
+  @@syringe_size = 10 #ml, standard syringe
+  @@threshold = 128 #pixel intensity
 
   # ROOT ROUTE
   get '/' do
