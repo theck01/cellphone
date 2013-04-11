@@ -9,7 +9,7 @@ class AutoExpApp < Sinatra::Base
   end
 
   post '/experiment/form_test' do
-    params.to_s
+    redirect 'experiment/show'
   end
 
   # start experiment, if one is not already running
