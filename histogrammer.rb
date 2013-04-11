@@ -23,6 +23,6 @@ class HistogrammerApp < Sinatra::Base
     histogram = Array.new(256,0)
     pixels.each{ |i| histogram[i/256] += 1 }
 
-    histogram.map{ |i| i.to_f/pixels.length }.to_json
+    { histogram: histogram.map{ |i| i.to_f/pixels.length } }.to_json
   end
 end
