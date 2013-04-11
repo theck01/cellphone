@@ -40,7 +40,7 @@ class AutoExpApp < Sinatra::Base
 
   # observe the experiment currently running
   get '/experiment/show' do
-    scripts :experiment_show
+    scripts :experiment_show, :Chart
     @page = 'experiment/show'
     @start_img = @@recent_img_name
     haml :layout
