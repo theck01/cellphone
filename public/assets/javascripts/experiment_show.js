@@ -117,7 +117,6 @@ function requestData() {
   
 $(function () {
 
-  $("#slider").slider({ max: 255, min: 0, step: 1, value: 128 });
   $chart = $("#chart");
   $cell_img = $("#cell_img");
   $cell_img_path = $("#cell_img_path");
