@@ -36,12 +36,4 @@ class AutoExpApp < Sinatra::Base
     content_type :json
     { path: "/assets/imgs/#{@@recent_img_name}" }.to_json
   end
-
-  put '/api/set_threshold' do
-    if params[:threshold].to_i.between?(0,255)
-      @@threshold = params[:threshold]
-    else
-      halt(400)
-    end
-  end
 end
