@@ -61,12 +61,11 @@ class AutoExpApp < Sinatra::Base
   # render the setup page
   get '/experiment/setup' do
     scripts :experiment_setup
-    styles :experiment_setup
     @page = 'experiment/setup'
     haml :layout
   end
   
-  # render the setup page
+  # save values from the setup page
   post '/experiment/setup' do
     params.each{ |k,v| @@experiment_setup[k.to_sym] = v }
     puts @@experiment_setup.to_s
