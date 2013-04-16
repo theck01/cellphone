@@ -17,23 +17,9 @@ var histogram = newArray(0,256);
 var average_intensity = 128;
 var threshold = 128;
 
-function setThreshold(new_value) {
-  new_value = Math.round(new_value);
-  $.ajax({
-    url: '/api/set_threshold',
-    type: 'PUT',
-    data: { threshold: new_value },
-    success: function (data) {
-      threshold = new_value;
-      updateChart();
-    }
-  });
-}
-
 function sizeChart(){
   $chart.height($chart.width()*0.75);
 }
-
 
 function updateChart(){
 
@@ -43,15 +29,13 @@ function updateChart(){
   $chart.highcharts({
     chart: { 
       type: 'column',
-      events: { click: 
-        function (event) {
-          setThreshold(event.xAxis[0].value);
-        }
+      zoomType: 'xy'
+    },
+    plotOptions: { 
+      column: {
+        pointPadding: 0, borderWidth:0, groupPadding: 0, shadow: false
       }
     },
-    plotOptions: { column: {
-      pointPadding: 0, borderWidth:0, groupPadding: 0, shadow: false
-    }},
     title: { text: 'Fluorescence Intensity' },
     xAxis: { 
       categories: x_labels,
