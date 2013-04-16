@@ -2,11 +2,30 @@
 
   %h2#title.grid-100.mobile-grid-100 Current Experiment
 
-  #img_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
-    %img#cell_img.grid-100.mobile-grid-100(src="/assets/imgs/#{@start_img}")
-
   #chart_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
     #chart.grid-95.suffix-5mobile-grid-95.mobile-suffix-5
-    %p.grid-100.mobile-grid-100{ align: 'center' } 
-      Click on the chart to set the threshold value
-    
+
+  #img_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
+    %img#cell_img.grid-100.mobile-grid-100(src="/assets/imgs/#{@start_img}")
+  .clear
+
+  #settings.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
+    %h3#values.grid-60.prefix-35.suffix-5.mobile-grid-100
+      Threshold: 128
+      %br
+      Dose: 50ul
+      %br
+      Syringe: 25ml
+
+  #run_controls.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
+    %br
+    %br
+    #dose_container.grid-15.prefix-5.suffix-5.mobile-grid-100{ align: 'center' }
+      %button#dose_button.bluebutton
+    #edit_container.grid-15.prefix-5.suffix-5.mobile-grid-100{ align: 'center' }
+      %button#edit_button.greenbutton
+    #pause_container.grid-15.prefix-5.suffix-5.mobile-grid-100{ align: 'center' }
+      %button#pause_button.orangebutton
+    #stop_container.grid-15.prefix-5.suffix-5.mobile-grid-100{ align: 'center' }
+      %button#stop_button.redbutton
+
