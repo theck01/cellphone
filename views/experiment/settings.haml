@@ -1,0 +1,36 @@
+%h2#title.grid-100.mobile-grid-100 Experiment Settings
+
+%form#settings.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/form_test', method: 'post' }
+
+  #fields.grid-40.prefix-35.suffix-25.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent
+
+    %span#dosage_field.grid-100.mobile-grid-100.grid-parent
+      %label.grid-25.mobile-grid-100 Dosage (ul)
+      %input.grid-50.mobile-grid-100{ type: 'text', name: 'dosage' }
+    %br
+
+    %span#syringe_field.grid-100.mobile-grid-100.grid-parent
+      %label.grid-25.mobile-grid-100 Syringe Size
+      .grid-50.mobile-grid-100
+        %input#size10.radio{ type: 'radio', name: 'syringe', value: 10 } 10ml
+        %input#size25.radio{ type: 'radio', name: 'syringe', value: 25, checked: true } 25ml
+        %input#size50.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
+    %br
+
+    %span#time_fields.grid-100.mobile-grid-100.grid-parent
+      %label.grid-25.mobile-grid-100 Time
+      %input#time_hours.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-40.mobile-grid-prefix-5.mobile-grid-suffix-5
+      %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-40.mobile-grid-prefix-5.mobile-grid-suffix-5 Hours
+      %input#time_minutes.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-40.mobile-grid-prefix-5.mobile-grid-suffix-5
+      %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-40.mobile-grid-prefix-5.mobile-grid-suffix-5 Minutes
+    %br
+
+    %span#threshold_field.grid-100.mobile-grid-100.grid-parent
+      %label.grid-25.mobile-grid-100 Threshold (pixel intensity)
+      %input.grid-50.mobile-grid-100{ type: 'text', name: 'threshold' }
+    %br
+  %br
+
+  #submit_settings.grid-100.mobile-grid-100{ align: 'center' }
+    %input.button.greenbutton{ type: 'submit', value: 'Save' }
+
