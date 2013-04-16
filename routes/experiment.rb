@@ -1,14 +1,36 @@
 class AutoExpApp < Sinatra::Base
 
   # start experiment, if one is not already running
-  post '/experiment/begin' do
+  get '/experiment/begin' do
     unless @@img_thread
 
       #new image capture worker process
       @@img_thread = Thread.new do
         while true do
+
+          # capture image from microscope
           recent_img_name = get_image 'test', './public/assets/imgs'
-          @@recent_img_name = File.basename recent_img_name
+          recent_img_name = File.basename recent_img_name
+
+          # try to request histogram from image from histogrammer server
+          begin
+            url = "http://#{settings.histogrammer_ip}:3000/api/histogram"
+            response = RestClient.get "#{url}/#{recent_img_name}"
+            @histogram = JSON.parse(response.body)['histogram']
+          rescue Errno::ECONNREFUSED
+            @histogram = Array.new(256,0)
+          end
+
+          # save a histogram, valid or zeros
+          path = "./public/assets/histograms"
+          histname = "histogram_of_#{File.basename(recent_img_name, '.jpg')}"
+          File.open("#{path}/#{histname}.csv", "w") do |file|
+            file.puts @histogram.to_json
+          end
+
+          # set recent image name variable last, to
+          # ensure histogram file is ready
+          @@recent_img_name = recent_img_name
         end
       end
     end

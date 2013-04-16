@@ -11,26 +11,15 @@ class AutoExpApp < Sinatra::Base
     content_type :json
 
     path = "./public/assets/histograms"
-    url = "http://#{settings.histogrammer_ip}:3000/api/histogram"
+    if @@recent_img_name == '.placeholder.jpg'
+      histname = '.histogram_of_placeholder'
+    else
+      histname = "histogram_of_#{File.basename(@@recent_img_name, '.jpg')}"
+    end
 
-    # try to request a new histogram
-=begin
-    begin
-      response = RestClient.get "#{url}/#{@@recent_img_name}"
-      @histogram = JSON.parse(response.body)['histogram']
-
-      # save histogram to file
-      histfile = "histogram_of_#{File.basename(@@recent_img_name, '.jpg')}"
-      File.open("#{path}/#{histfile}.csv", "w") do |file|
-        file.puts JSON.parse(response.body)['histogram']
-      end
-    # if histogrammar resource not available load placeholder
-    rescue RestClient::ResourceNotFound
-=end
-      File.open("#{path}/.histogram_of_placeholder.csv") do |file|
-        @histogram = JSON.parse(file.gets)
-      end
-    #end
+    File.open("#{path}/#{histname}.csv") do |file|
+      @histogram = JSON.parse(file.gets)
+    end
 
     # statistics on the histogram
     avg = @histogram.reduce(:+)/@histogram.length
