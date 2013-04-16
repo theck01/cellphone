@@ -10,7 +10,39 @@ label{
   text-align: left;
 }
 
-.startbutton{
+.bluebutton{
+	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
+	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
+	box-shadow:inset -1px -1px 4px 0px #808080;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0037D0), color-stop(1, #0234BD) );
+	background:-moz-linear-gradient( center top, #0037D0 5%, #0234BD 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0037D0', endColorstr='#0234BD');
+	background-color:#0037D0;
+	-moz-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	display:inline-block;
+	color:#ffffff;
+	font-size:18px;
+	font-weight:bold;
+	padding:12px 28px;
+	text-decoration:none;
+	text-shadow:1px 1px 3px #4f4f4f;
+}
+
+.bluebutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0234BD), color-stop(1, #0037D0) );
+	background:-moz-linear-gradient( center top, #0234BD 5%, #0037D0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0234BD', endColorstr='#0037D0');
+	background-color:#0234BD;
+}
+
+.bluebutton:active {
+	position:relative;
+	top:1px;
+}
+
+.greenbutton{
 	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
 	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
 	box-shadow:inset -1px -1px 4px 0px #808080;
@@ -30,14 +62,78 @@ label{
 	text-shadow:1px 1px 3px #4f4f4f;
 }
 
-.startbutton:hover {
+.greenbutton:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00ba1c), color-stop(1, #04c227) );
 	background:-moz-linear-gradient( center top, #00ba1c 5%, #04c227 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ba1c', endColorstr='#04c227');
 	background-color:#00ba1c;
 }
 
-.startbutton:active {
+.greenbutton:active {
+	position:relative;
+	top:1px;
+}
+
+.orangebutton{
+	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
+	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
+	box-shadow:inset -1px -1px 4px 0px #808080;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #DC6802), color-stop(1, #D06100) );
+	background:-moz-linear-gradient( center top, #DC6802 5%, #D06100 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#DC6802', endColorstr='#D06100');
+	background-color:#DC6802;
+	-moz-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	display:inline-block;
+	color:#ffffff;
+	font-size:18px;
+	font-weight:bold;
+	padding:12px 28px;
+	text-decoration:none;
+	text-shadow:1px 1px 3px #4f4f4f;
+}
+
+.orangebutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #D06100), color-stop(1, #DC6802) );
+	background:-moz-linear-gradient( center top, #D06100 5%, #DC6802 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#D06100', endColorstr='#DC6802');
+	background-color:#D06100;
+}
+
+.orangebutton:active {
+	position:relative;
+	top:1px;
+}
+
+.redbutton{
+	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
+	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
+	box-shadow:inset -1px -1px 4px 0px #808080;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #E10404), color-stop(1, #CB0202) );
+	background:-moz-linear-gradient( center top, #E10404 5%, #CB0202 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#E10404', endColorstr='#CB0202');
+	background-color:#E10404;
+	-moz-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	display:inline-block;
+	color:#ffffff;
+	font-size:18px;
+	font-weight:bold;
+	padding:12px 28px;
+	text-decoration:none;
+	text-shadow:1px 1px 3px #4f4f4f;
+}
+
+.redbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #CB0202), color-stop(1, #E10404) );
+	background:-moz-linear-gradient( center top, #CB0202 5%, #E10404 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#CB0202', endColorstr='#E10404');
+	background-color:#CB0202;
+}
+
+.redbutton:active {
 	position:relative;
 	top:1px;
 }
