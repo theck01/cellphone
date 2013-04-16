@@ -100,7 +100,6 @@ function requestData() {
 
   
 $(function () {
-
   $chart = $("#chart");
   $cell_img = $("#cell_img");
   $cell_img_path = $("#cell_img_path");
