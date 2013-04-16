@@ -1,12 +1,12 @@
 %h2#title.grid-100.mobile-grid-100 Experiment Settings
 
-%form#settings.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/form_test', method: 'post' }
+%form#settings.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/bein', method: 'post', onsubmit: "return validateSettings();" }
 
   #fields.grid-40.prefix-35.suffix-25.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent
 
-    %span#dosage_field.grid-100.mobile-grid-100.grid-parent
+    %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Dosage (ul)
-      %input.grid-50.mobile-grid-100{ type: 'text', name: 'dosage' }
+      %input#dosage_field.grid-50.mobile-grid-100{ type: 'text', name: 'dosage' }
     %br
 
     %span#syringe_field.grid-100.mobile-grid-100.grid-parent
@@ -17,18 +17,18 @@
         %input#size50.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
     %br
 
-    %span#time_fields.grid-100.mobile-grid-100.grid-parent
+    %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Time
-      %input#time_hours.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5
+      %input#hours_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'hours' }
       %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5 Hours
-      %input#time_minutes.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5
+      %input#minutes_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'minutes' }
       %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5 Minutes
     %br
     .clear
 
-    %span#threshold_field.grid-100.mobile-grid-100.grid-parent
+    %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Threshold (pixel intensity)
-      %input.grid-50.mobile-grid-100{ type: 'text', name: 'threshold' }
+      %input#threshold_field.grid-50.mobile-grid-100{ type: 'text', name: 'threshold' }
     %br
   %br
 

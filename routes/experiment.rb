@@ -1,5 +1,5 @@
 class AutoExpApp < Sinatra::Base
-
+  
   # start experiment, if one is not already running
   get '/experiment/begin' do
     unless @@img_thread
@@ -48,14 +48,18 @@ class AutoExpApp < Sinatra::Base
     redirect '/'
   end
 
-  post '/experiment/form_test' do
-    params.to_s
-  end
-
   #render the settings page
   get '/experiment/settings' do
+    scripts :experiment_settings
     @page = 'experiment/settings'
     haml :layout
+  end
+
+  # save values from the settings page
+  post '/experiment/settings' do
+    params.each{ |k,v| @@experiment_settings[k.to_sym] = v.to_f }
+    puts @@experiment_settings.to_s
+    redirect '/experiment/begin'
   end
 
   # render the setup page
