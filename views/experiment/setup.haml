@@ -2,43 +2,43 @@
 
   %h2#title.grid-100.mobile-grid-100 Experiment Setup
 
-  %form#setup.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/form_test', method: 'post' }
+  %form#setup.grid-100.mobile-grid-100.grid-parent{ action: '/experiment/setup', method: 'post', onsubmit: "return validateSetup();" }
 
     #fields.grid-100.mobile-grid-100.grid-parent
 
-      %span#name_field.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 What is your name?
-        %input.grid-50.mobile-grid-100{ type: 'text', name: 'name' }
+      %span.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-33.mobile-grid-100 What is your name?
+        %input#name_field.grid-66.mobile-grid-100{ type: 'text', name: 'name' }
 
-      %span#experiment_title.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 What is the title of your experiment?
-        %input.grid-50.mobile-grid-100{ type: 'text', name: 'title' }
+      %span.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-33.mobile-grid-100 What is the name of the experiment?
+        %input#title_field.grid-66.mobile-grid-100{ type: 'text', name: 'title' }
       .clear
       %br
 
-      #experiment_description.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+      .grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
         %label.grid-100.mobile-grid-100
           Please provide a brief description of the experiment
-        %input.grid-100.mobile-grid-100{ type: 'text', name: 'description' }
+        %input#description.grid-100.mobile-grid-100{ type: 'text', name: 'description' }
 
-      #experiment_expectations.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+      .grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
         %label.grid-100.mobile-grid-100
           What do you expect to see happen in this experiment?
-        %input.grid-100.mobile-grid-100{ type: 'text', name: 'expectations' }
+        %input#expectation.grid-100.mobile-grid-100{ type: 'text', name: 'expectations' }
       .clear
       %br 
     
-      %span#cells_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 Are the cells positioned and visible under the microscope?
-        .grid-50.mobile-grid-100{ align: 'center' }
+      %span.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-75.mobile-grid-100 Can you view the cells as desired with the Leica Suite? (If so be sure to shut the Leica Suite down before continuing)
+        .grid-25.mobile-grid-100{ align: 'center' }
           %input.radio{ type: 'radio', name: 'cells', value: 'true' } Yes
-          %input.radio{ type: 'radio', name: 'cells', value: 'false', checked: true } No
+          %input.radio{ type: 'radio', name: 'cells', value: '', checked: true } No
 
-      %span#dropper_check.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
-        %label.grid-50.mobile-grid-100 Is the drug administration dropper placed correctly?
-        .grid-50.mobile-grid-100.grid-parent{ align: 'center' }
+      %span.grid-parent.grid-40.prefix-5.suffix-5.mobile-grid-100
+        %label.grid-75.mobile-grid-100 Is the drug administration dropper placed on the correct location of the slide?
+        .grid-25.mobile-grid-100.grid-parent{ align: 'center' }
           %input.radio{ type: 'radio', name: 'dropper', value: 'true' } Yes
-          %input.radio{ type: 'radio', name: 'dropper', value: 'false', checked: true } No
+          %input.radio{ type: 'radio', name: 'dropper', value: '', checked: true } No
       .clear
     %br
 

@@ -10,6 +10,9 @@ class AutoExpApp < Sinatra::Base
   
   # SERVER STATE VARIABLES
   @@dose = 5 #ml
+  @@experiment_done = false
+  @@experiment_setup = {}
+  @@experiment_settings = {}
   @@img_prefix = 'test'
   @@img_thread = nil
   @@recent_img_name = '.placeholder.jpg'

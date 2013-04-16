@@ -65,6 +65,13 @@ class AutoExpApp < Sinatra::Base
     @page = 'experiment/setup'
     haml :layout
   end
+  
+  # render the setup page
+  post '/experiment/setup' do
+    params.each{ |k,v| @@experiment_setup[k.to_sym] = v }
+    puts @@experiment_setup.to_s
+    redirect '/experiment/settings'
+  end
 
   # render the experiment viewing page
   get '/experiment/show' do
