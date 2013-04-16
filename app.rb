@@ -11,8 +11,10 @@ class AutoExpApp < Sinatra::Base
   # SERVER STATE VARIABLES
   @@dose = 5 #ml
   @@experiment_done = false
-  @@experiment_setup = {}
-  @@experiment_settings = {}
+  @@experiment_setup = { title: 'test' }
+  @@experiment_settings = { 
+    dosage: 1.0, hours: 1.0, minutes: 0, syringe: 25.0, threshold: 128.0
+  }
   @@img_prefix = 'test'
   @@img_thread = nil
   @@recent_img_name = '.placeholder.jpg'

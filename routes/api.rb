@@ -36,4 +36,9 @@ class AutoExpApp < Sinatra::Base
     content_type :json
     { path: "/assets/imgs/#{@@recent_img_name}" }.to_json
   end
+
+  get '/api/settings' do
+    content_type :json
+    @@experiment_settings.to_json
+  end
 end
