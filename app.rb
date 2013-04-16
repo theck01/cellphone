@@ -21,8 +21,14 @@ class AutoExpApp < Sinatra::Base
 
   # ROOT ROUTE
   get '/' do
-    @page = :index
-    haml :layout
+    if !@@img_thread && !@@experiment_done
+      redirect '/experiment/setup' 
+    elsif @@img_thread
+      redirect '/experiment/show' 
+    else
+      @page = :index
+      haml :layout
+    end
   end
 end
 
