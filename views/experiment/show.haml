@@ -11,11 +11,11 @@
 
   #settings.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
     %h3#values.grid-60.prefix-35.suffix-5.mobile-grid-100
-      Threshold: 128
+      = "Dosage (ul): #{@settings[:dosage]}"
       %br
-      Dose: 50ul
+      = "Syringe Size (ml): #{@settings[:syringe]}"
       %br
-      Syringe: 25ml
+      = "Threshold: #{@settings[:threshold]}"
 
   #run_controls.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
     %br

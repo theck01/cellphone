@@ -6,29 +6,38 @@
 
     %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Dosage (ul)
-      %input#dosage_field.grid-50.mobile-grid-100{ type: 'text', name: 'dosage' }
+      %input#dosage_field.grid-50.mobile-grid-100{ type: 'text', name: 'dosage', value: @settings[:dosage] }
     %br
 
     %span#syringe_field.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Syringe Size
       .grid-50.mobile-grid-100
-        %input#size10.radio{ type: 'radio', name: 'syringe', value: 10 } 10ml
-        %input#size25.radio{ type: 'radio', name: 'syringe', value: 25, checked: true } 25ml
-        %input#size50.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
+        - if @settings[:syringe] == 10
+          %input#size10.radio{ type: 'radio', name: 'syringe', value: 10, checked: true } 10ml
+          %input#size25.radio{ type: 'radio', name: 'syringe', value: 25 } 25ml
+          %input#size50.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
+        - if @settings[:syringe] == 25
+          %input#size10.radio{ type: 'radio', name: 'syringe', value: 10 } 10ml
+          %input#size25.radio{ type: 'radio', name: 'syringe', value: 25, checked: true } 25ml
+          %input#size50.radio{ type: 'radio', name: 'syringe', value: 50 } 50ml
+        - if @settings[:syringe] == 50
+          %input#size10.radio{ type: 'radio', name: 'syringe', value: 10 } 10ml
+          %input#size25.radio{ type: 'radio', name: 'syringe', value: 25 } 25ml
+          %input#size50.radio{ type: 'radio', name: 'syringe', value: 50, checked: true } 50ml
     %br
 
     %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Time
-      %input#hours_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'hours' }
+      %input#hours_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'hours', value: @settings[:hours] }
       %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5 Hours
-      %input#minutes_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'minutes' }
+      %input#minutes_field.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'minutes', value: @settings[:minutes] }
       %label.grid-15.grid-prefix-5.grid-suffix-5.mobile-grid-15.mobile-grid-prefix-5.mobile-grid-suffix-5 Minutes
     %br
     .clear
 
     %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Threshold (pixel intensity)
-      %input#threshold_field.grid-50.mobile-grid-100{ type: 'text', name: 'threshold' }
+      %input#threshold_field.grid-50.mobile-grid-100{ type: 'text', name: 'threshold', value: @settings[:threshold] }
     %br
   %br
 

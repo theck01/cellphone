@@ -52,6 +52,7 @@ class AutoExpApp < Sinatra::Base
   get '/experiment/settings' do
     scripts :experiment_settings
     @page = 'experiment/settings'
+    @settings = @@experiment_settings
     haml :layout
   end
 
@@ -81,6 +82,7 @@ class AutoExpApp < Sinatra::Base
     scripts :experiment_show, :highcharts
     @page = 'experiment/show'
     @start_img = @@recent_img_name
+    @settings = @@experiment_settings
     haml :layout
   end
 end

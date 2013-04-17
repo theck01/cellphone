@@ -65,13 +65,3 @@ function validateSettings() {
 
   return true;
 }
-
-$(function () {
-  $.getJSON('/api/settings', function (data) {
-    $('#dosage_field').val(data['dosage']);
-    $('#hours_field').val(data['hours']);
-    $('#minutes_field').val(data['minutes']);
-    $('#threshold_field').val(data['threshold']);
-    $("#size"+data['syringe']).attr('checked', 'checked');
-  });
-});
