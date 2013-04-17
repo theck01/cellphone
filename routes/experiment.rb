@@ -31,6 +31,9 @@ class AutoExpApp < Sinatra::Base
           # set recent image name variable last, to
           # ensure histogram file is ready
           @@recent_img_name = recent_img_name
+
+          # stop the thread if the experiment should be paused
+          Thread.stop if @@experiment_paused
         end
       end
     end
@@ -46,6 +49,15 @@ class AutoExpApp < Sinatra::Base
     end
 
     redirect '/'
+  end
+
+  get '/experiment/pause' do
+    @@experiment_paused = true
+  end
+
+  get '/experiment/resume' do
+    @@experiment_paused = false
+    @@img_thread.run if @@img_thread
   end
 
   #render the settings page
@@ -81,9 +93,11 @@ class AutoExpApp < Sinatra::Base
   # render the experiment viewing page
   get '/experiment/show' do
     scripts :experiment_show, :highcharts
+    styles :experiment_show
     @page = 'experiment/show'
     @start_img = @@recent_img_name
     @settings = @@experiment_settings
+    @paused = @@experiment_paused && !@@experiment_done
     haml :layout
   end
 end

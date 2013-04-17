@@ -106,6 +106,38 @@ label{
 	top:1px;
 }
 
+.purplebutton{
+	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
+	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
+	box-shadow:inset -1px -1px 4px 0px #808080;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #A600D4), color-stop(1, #9600BF) );
+	background:-moz-linear-gradient( center top, #A600D4 5%, #9600BF 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#A600D4', endColorstr='#9600BF');
+	background-color:#A600D4;
+	-moz-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	display:inline-block;
+	color:#ffffff;
+	font-size:18px;
+	font-weight:bold;
+	padding:12px 28px;
+	text-decoration:none;
+	text-shadow:1px 1px 3px #4f4f4f;
+}
+
+.purplebutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9600BF), color-stop(1, #A600D4) );
+	background:-moz-linear-gradient( center top, #9600BF 5%, #A600D4 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9600BF', endColorstr='#A600D4');
+	background-color:#9600BF;
+}
+
+.purplebutton:active {
+	position:relative;
+	top:1px;
+}
+
 .redbutton{
 	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
 	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;
