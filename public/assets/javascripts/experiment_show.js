@@ -104,6 +104,16 @@ $(function () {
   $cell_img = $("#cell_img");
   $cell_img_path = $("#cell_img_path");
 
+  // retrieve threshold from server
+  $.ajax({
+    async: false,
+    url: '/api/settings', 
+    dataType: 'json',
+    success: function (data) {
+      threshold = data['threshold'];
+    }
+  });
+
   sizeChart();
   requestData();
   setInterval(requestData, 7500);
