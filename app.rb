@@ -8,10 +8,10 @@ class AutoExpApp < Sinatra::Base
   register Sinatra::ConfigFile
   config_file 'config.yml'
   
-  # SERVER STATE VARIABLES
-  @@dose = 5 #ml
+  # SERVER STATE VARIABLES, with default values
+  @@dose = 1 #ul
   @@experiment_done = false
-  @@experiment_setup = { title: 'test' }
+  @@experiment_setup = { file_prefix: 'test' }
   @@experiment_settings = { 
     dosage: 1.0, hours: 1.0, minutes: 0, syringe: 25.0, threshold: 128.0
   }

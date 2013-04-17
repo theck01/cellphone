@@ -9,7 +9,7 @@ class AutoExpApp < Sinatra::Base
         while true do
 
           # capture image from microscope
-          recent_img_name = get_image 'test', './public/assets/imgs'
+          recent_img_name = get_image @@experiment_setup[:file_prefix], './public/assets/imgs'
           recent_img_name = File.basename recent_img_name
 
           # try to request histogram from image from histogrammer server
@@ -73,6 +73,7 @@ class AutoExpApp < Sinatra::Base
   # save values from the setup page
   post '/experiment/setup' do
     params.each{ |k,v| @@experiment_setup[k.to_sym] = v }
+    @@experiment_setup[:file_prefix] = @@experiment_setup[:title].downcase.gsub(/[^a-z\s_\-]/, '').gsub(/\s/, '-')
     puts @@experiment_setup.to_s
     redirect '/experiment/settings'
   end
