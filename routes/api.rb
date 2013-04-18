@@ -14,7 +14,7 @@ class AutoExpApp < Sinatra::Base
   get '/api/histogram' do
     content_type :json
 
-    path = "./public/assets/histograms"
+    path = "./logs/histograms"
     if @@recent_img_name == '.placeholder.jpg'
       histname = '.histogram_of_placeholder'
     else

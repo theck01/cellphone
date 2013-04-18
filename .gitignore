@@ -1,4 +1,4 @@
 public/assets/imgs/*
-public/assets/histograms/*
+logs/*
 .rvmrc
 *.sq3

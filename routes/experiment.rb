@@ -22,7 +22,7 @@ class AutoExpApp < Sinatra::Base
           end
 
           # save a histogram, valid or zeros
-          path = "./public/assets/histograms"
+          path = "./logs/histograms"
           histname = "histogram_of_#{File.basename(recent_img_name, '.jpg')}"
           File.open("#{path}/#{histname}.csv", "w") do |file|
             file.puts @histogram.to_json
