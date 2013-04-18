@@ -9,7 +9,7 @@ class AutoExpApp < Sinatra::Base
   config_file 'config.yml'
   
   # SERVER STATE VARIABLES, with default values
-  @@dose = 1 #ul
+  @@dose = 0 #ul
   @@experiment_done = false
   @@experiment_paused = false
   @@experiment_setup = { file_prefix: 'test' }
