@@ -29,7 +29,8 @@ class AutoExpApp < Sinatra::Base
           end
 
           avg = @histogram.each_with_index.map{ |x,i| x*i }.reduce(:+)
-          if avg < @@experiment_settings[:threshold]
+
+          if avg < @@experiment_settings[:threshold] && !@@experiment_done
             @@dose = @@experiment_settings[:dosage]
             puts "Drug dose for administration set automatically"
             log_dose dosage_ul: @@dose, requested_automatically: true
