@@ -48,16 +48,19 @@ class AutoExpApp < Sinatra::Base
       @@img_thread = nil
     end
 
+    @@experiment_done = true
     redirect '/'
   end
 
   get '/experiment/pause' do
     @@experiment_paused = true
+    redirect 'experiment/show' # reload the page, slightly different content
   end
 
   get '/experiment/resume' do
     @@experiment_paused = false
     @@img_thread.run if @@img_thread
+    redirect 'experiment/show' # reload the page, slightly different content
   end
 
   #render the settings page
