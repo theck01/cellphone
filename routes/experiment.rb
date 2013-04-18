@@ -30,8 +30,9 @@ class AutoExpApp < Sinatra::Base
 
           avg = @histogram.each_with_index.map{ |x,i| x*i }.reduce(:+)
           if avg < @@experiment_settings[:threshold]
-            puts "Drug dosage should be administered"
             @@dose = @@experiment_settings[:dosage]
+            puts "Drug dose for administration set automatically"
+            log_dose dosage_ul: @@dose, requested_automatically: true
           end
 
           # set recent image name variable last, to
@@ -98,6 +99,7 @@ class AutoExpApp < Sinatra::Base
     params.each{ |k,v| @@experiment_setup[k.to_sym] = v }
     @@experiment_setup[:file_prefix] = @@experiment_setup[:title].downcase.gsub(/[^a-z\s_\-]/, '').gsub(/\s/, '-')
     puts @@experiment_setup.to_s
+    log_setup @@experiment_setup
     redirect '/experiment/settings'
   end
 

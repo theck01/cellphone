@@ -9,3 +9,6 @@ AutoExpApp.helpers Sinatra::Javascripts
 
 require './helpers/imagecapture'
 AutoExpApp.helpers Sinatra::ImageCapture
+
+require './helpers/logs'
+AutoExpApp.helpers Sinatra::Logs

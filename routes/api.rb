@@ -4,7 +4,11 @@ class AutoExpApp < Sinatra::Base
   get '/api/dose' do
     content_type :json
 
-    puts 'Dose administered' if @@dose != 0
+    if @@dose != 0
+      puts 'Dose administered' 
+      log_dose dosage_ul: @@dose, administered: true
+    end
+
     dose = @@dose
     @@dose = 0
     { dose: dose, syringe_size: @@experiment_settings[:syringe] }.to_json
@@ -39,6 +43,7 @@ class AutoExpApp < Sinatra::Base
   # request manual dose be administered
   post '/api/manual_dose' do
     @@dose = @@experiment_settings[:dosage]
+    log_dose dosage_ul: @@dose, requested_manually: true
     puts "Dose requested manually"
   end
 
