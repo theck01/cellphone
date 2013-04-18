@@ -41,6 +41,10 @@ class AutoExpApp < Sinatra::Base
           @@recent_img_name = recent_img_name
 
           # check if runtime elapsed
+          if @@end_time && (@@end_time - Time.now) < 0
+            @@experiment_done = true
+            @@experiment_paused = true
+          end
 
           # stop the thread if the experiment should be paused
           Thread.stop if @@experiment_paused
@@ -76,7 +80,17 @@ class AutoExpApp < Sinatra::Base
   #render the settings page
   get '/experiment/settings' do
     scripts :experiment_settings
+
+    if @@end_time
+      time_diff = @@end_time - Time.now
+    else
+      time_diff = 60*60
+    end
+
+    @hours_left = time_diff.div(60*60).floor
+    @minutes_left = time_diff.modulo(60*60).div(60).floor
     @page = 'experiment/settings'
+
     @settings = @@experiment_settings
     haml :layout
   end
@@ -84,6 +98,7 @@ class AutoExpApp < Sinatra::Base
   # save values from the settings page
   post '/experiment/settings' do
     params.each{ |k,v| @@experiment_settings[k.to_sym] = v.to_f }
+    @@end_time = Time.now + (@@experiment_settings[:hours]*60*60 + @@experiment_settings[:minutes]*60)
     puts @@experiment_settings.to_s
     redirect '/experiment/begin'
   end

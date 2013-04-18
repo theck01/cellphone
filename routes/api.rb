@@ -60,7 +60,14 @@ class AutoExpApp < Sinatra::Base
   # request the current settings from the server
   get '/api/settings' do
     content_type :json
-    @@experiment_settings[:hours_left]
+
+    time_diff = @@end_time - Time.now
+    hours = time_diff.div(60*60).floor
+    minutes = time_diff.modulo(60*60).div(60).floor
+
+    @@experiment_settings[:hours_left] = hours
+    @@experiment_settings[:minutes_left] = minutes
+
     @@experiment_settings.to_json
   end
 end

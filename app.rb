@@ -10,17 +10,27 @@ class AutoExpApp < Sinatra::Base
   
   # SERVER STATE VARIABLES, with default values
   @@dose = 0 #ul
+  @@end_time = nil
   @@experiment_done = false
   @@experiment_paused = false
   @@experiment_setup = { file_prefix: 'test' }
   @@experiment_settings = { 
-    dosage: 1.0, hours: 1.0, minutes: 0, syringe: 25.0, threshold: 128.0
+    dosage: 1.0, hours: 1.0, minutes: 0, syringe: 25.0, threshold: 0
   }
   @@img_prefix = 'test'
   @@img_thread = nil
   @@recent_img_name = '.placeholder.jpg'
   @@syringe_size = 10 #ml, standard syringe
-  @@threshold = 128 #pixel intensity
+
+  # before all routes check to see if experiment has expired. If so
+  # kill the worker thread
+  before '/*' do
+    if @@img_thread && @@experiment_done
+      @@img_thread.terminate
+      @@img_thread = nil
+    end
+  end
+
 
   # ROOT ROUTE
   get '/' do
