@@ -28,9 +28,17 @@ class AutoExpApp < Sinatra::Base
             file.puts @histogram.to_json
           end
 
+          avg = @histogram.each_with_index.map{ |x,i| x*i }.reduce(:+)
+          if avg < @@experiment_settings[:threshold]
+            puts "Drug dosage should be administered"
+            @@dose = @@experiment_settings[:dosage]
+          end
+
           # set recent image name variable last, to
           # ensure histogram file is ready
           @@recent_img_name = recent_img_name
+
+          # check if runtime elapsed
 
           # stop the thread if the experiment should be paused
           Thread.stop if @@experiment_paused

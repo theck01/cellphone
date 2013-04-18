@@ -20,7 +20,7 @@
 
   #run_controls.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
     #left_settings.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %button#dose_button.purplebutton Give Dose
+      %button#dose_button.purplebutton{ onclick: 'manualDose();' } Give Dose
       %button#settings_button.bluebutton{ onclick: "window.location.href = '/experiment/settings'"} Settings
     #right_settings.grid-40.prefix-5.suffix-5.mobile-grid-100
       - if @paused

@@ -99,6 +99,11 @@ function requestData() {
 }
 
   
+function manualDose() {
+  $.post('/api/manual_dose');
+}
+
+
 $(function () {
   $chart = $("#chart");
   $cell_img = $("#cell_img");

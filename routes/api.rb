@@ -3,7 +3,11 @@ class AutoExpApp < Sinatra::Base
   # request dosage and syringe information as json
   get '/api/dose' do
     content_type :json
-    { dose: @@dose, syringe_size: @@syringe_size }.to_json
+
+    puts 'Dose administered' if @@dose != 0
+    dose = @@dose
+    @@dose = 0
+    { dose: dose, syringe_size: @@experiment_settings[:syringe] }.to_json
   end
 
   # request the histogram of the last saved image
@@ -30,6 +34,12 @@ class AutoExpApp < Sinatra::Base
 
     { histogram: @histogram, average: avg, median: median, 
       stddev: stddev }.to_json
+  end
+
+  # request manual dose be administered
+  post '/api/manual_dose' do
+    @@dose = @@experiment_settings[:dosage]
+    puts "Dose requested manually"
   end
 
   # request name of most recent image captured from the microscope
