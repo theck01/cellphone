@@ -22,12 +22,13 @@ class AutoExpApp < Sinatra::Base
     end
 
     # statistics on the histogram
-    avg = @histogram.reduce(:+)/@histogram.length
+    weighted_freq = @histogram.each_with_index.map{ |x,i| x*i }
+    avg = weighted_freq.reduce(:+)
     median = @histogram.sort[@histogram.length/2]
-    sum_sq_diff = (@histogram.reduce{ |accum,i| accum + (i-avg)**2 })
+    sum_sq_diff = (weighted_freq.reduce{ |accum,i| accum + (i-avg)**2 })
     stddev = Math.sqrt(sum_sq_diff/(@histogram.length-1))
 
-    { histogram: @histogram, average: avg*256, median: median, 
+    { histogram: @histogram, average: avg, median: median, 
       stddev: stddev }.to_json
   end
 
