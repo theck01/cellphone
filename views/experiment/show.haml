@@ -1,6 +1,9 @@
 #experiment_parent.grid-90.prefix-5.suffix-5.mobile-grid-90.mobile-prefix-5.mobile-suffix-5.grid-parent
 
-  %h2#title.grid-100.mobile-grid-100 Current Experiment
+  %h2#title.grid-33.mobile-grid-100
+    = @title.to_s
+  %h2#time_left.grid-33.mobile-grid-100 Time Left:
+  %h2#state.grid-33.mobile-grid-100 Status:
 
   #chart_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
     #chart.grid-95.suffix-5mobile-grid-95.mobile-suffix-5

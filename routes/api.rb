@@ -60,14 +60,35 @@ class AutoExpApp < Sinatra::Base
   # request the current settings from the server
   get '/api/settings' do
     content_type :json
-
-    time_diff = @@end_time - Time.now
-    hours = time_diff.div(60*60).floor
-    minutes = time_diff.modulo(60*60).div(60).floor
-
-    @@experiment_settings[:hours_left] = hours
-    @@experiment_settings[:minutes_left] = minutes
-
     @@experiment_settings.to_json
+  end
+
+  # request status of the experiment
+  get '/api/state' do
+    content_type :json
+    
+    @state = {}
+
+    if @@experiment_done
+      time_diff = 0
+    else
+      time_diff = @@end_time - Time.now
+    end
+
+    @state[:hours_left] = time_diff.div(60*60).floor
+    @state[:minutes_left] = time_diff.modulo(60*60).div(60).floor
+
+
+    @state[:state] = if @@experiment_done
+      "Finished"
+    elsif @@experiment_paused
+      "Paused"
+    elsif @@dose != 0
+      "Dose Pending"
+    else
+      "Running"
+    end
+
+    @state.to_json
   end
 end

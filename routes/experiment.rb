@@ -66,25 +66,28 @@ class AutoExpApp < Sinatra::Base
     redirect '/'
   end
 
-  get '/experiment/pause' do
+  # pause the current experiment
+  post '/experiment/pause' do
     @@experiment_paused = true
-    redirect 'experiment/show' # reload the page, slightly different content
   end
 
-  get '/experiment/resume' do
+
+  # resume the current experiment
+  post '/experiment/resume' do
     @@experiment_paused = false
     @@img_thread.run if @@img_thread
-    redirect 'experiment/show' # reload the page, slightly different content
   end
 
   #render the settings page
   get '/experiment/settings' do
     scripts :experiment_settings
 
-    if @@end_time
-      time_diff = @@end_time - Time.now
+    time_diff = if @@experiment_done
+      0 
+    elsif @@end_time
+      @@end_time - Time.now
     else
-      time_diff = 60*60
+      60*60
     end
 
     @hours_left = time_diff.div(60*60).floor
@@ -124,9 +127,10 @@ class AutoExpApp < Sinatra::Base
     scripts :experiment_show, :highcharts
     styles :experiment_show
     @page = 'experiment/show'
+    @paused = @@experiment_paused && !@@experiment_done
     @start_img = @@recent_img_name
     @settings = @@experiment_settings
-    @paused = @@experiment_paused && !@@experiment_done
+    @title = @@experiment_setup[:title]
     haml :layout
   end
 end
