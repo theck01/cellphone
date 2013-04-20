@@ -51,10 +51,21 @@ class AutoExpApp < Sinatra::Base
     puts "Dose requested manually"
   end
 
+  # pause the current experiment
+  post '/api/pause' do
+    @@experiment_paused = true
+  end
+
   # request name of most recent image captured from the microscope
   get '/api/recent_img' do
     content_type :json
     { path: "/assets/imgs/#{@@recent_img_name}" }.to_json
+  end
+
+  # resume the current experiment
+  post '/api/resume' do
+    @@experiment_paused = false
+    @@img_thread.run if @@img_thread
   end
 
   # request the current settings from the server
@@ -69,7 +80,7 @@ class AutoExpApp < Sinatra::Base
     
     @state = {}
 
-    if @@experiment_done
+    if @@experiment_done || !@@end_time
       time_diff = 0
     else
       time_diff = @@end_time - Time.now

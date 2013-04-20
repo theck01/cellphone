@@ -14,7 +14,8 @@ function newArray(value, length) {
 /* JQuery variables for DOM */
 var $chart;
 var $cell_img;
-var $cell_img_path;
+var $pause_button;
+var $resume_button;
 var $state_header;
 var $time_left_header;
 
@@ -22,6 +23,28 @@ var $time_left_header;
 var histogram = newArray(0,256);
 var average_intensity = 128;
 var threshold = 128;
+
+
+function pauseExperiment() {
+  $.ajax({
+    url: '/api/pause',
+    type: 'POST',
+    async: false
+  });
+  updateStatus();
+  $pause_button.replaceWith($resume_button);
+}
+
+
+function resumeExperiment() {
+  $.ajax({
+    url: '/api/resume',
+    type: 'POST',
+    async: false
+  });
+  updateStatus();
+  $resume_button.replaceWith($pause_button);
+}
 
 
 function sizeChart(){
@@ -124,7 +147,6 @@ function updateStatus() {
       var state = data['state'];
       var hours = data['hours_left'];
       var minutes = data['minutes_left'];
-      console.log(data);
 
       $state_header.text('Status: ' + state);
       minutes_str = (minutes < 10 ? '0' : '') + minutes;
@@ -147,8 +169,21 @@ function manualDose() {
 $(function () {
   $chart = $("#chart");
   $cell_img = $("#cell_img");
+  $pause_button = $("#pause_button");
+  $resume_button = $("#resume_button");
   $state_header = $("#state");
   $time_left_header = $("#time_left");
+
+  $.ajax({
+    url: '/api/state',
+    dataType: 'json',
+    success: function (data) {
+      if(data['paused'] == 'true')
+        $pause_button.detach();
+      else
+        $resume_button.detach();
+    }
+  });
 
   updateData();
   setInterval(updateData, 7500);

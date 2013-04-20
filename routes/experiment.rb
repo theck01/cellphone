@@ -2,7 +2,7 @@ class AutoExpApp < Sinatra::Base
   
   # start experiment, if one is not already running
   get '/experiment/begin' do
-    unless @@img_thread
+    unless @@img_thread || @@experiment_done
 
       #new image capture worker process
       @@img_thread = Thread.new do
@@ -43,11 +43,10 @@ class AutoExpApp < Sinatra::Base
           # check if runtime elapsed
           if @@end_time && (@@end_time - Time.now) < 0
             @@experiment_done = true
-            @@experiment_paused = true
           end
 
           # stop the thread if the experiment should be paused
-          Thread.stop if @@experiment_paused
+          Thread.stop if @@experiment_paused || @@experiment_done
         end
       end
     end
@@ -64,18 +63,6 @@ class AutoExpApp < Sinatra::Base
 
     @@experiment_done = true
     redirect '/'
-  end
-
-  # pause the current experiment
-  post '/experiment/pause' do
-    @@experiment_paused = true
-  end
-
-
-  # resume the current experiment
-  post '/experiment/resume' do
-    @@experiment_paused = false
-    @@img_thread.run if @@img_thread
   end
 
   #render the settings page

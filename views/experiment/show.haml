@@ -26,8 +26,6 @@
       %button#dose_button.purplebutton{ onclick: 'manualDose();' } Give Dose
       %button#settings_button.bluebutton{ onclick: "window.location.href = '/experiment/settings'"} Settings
     #right_settings.grid-40.prefix-5.suffix-5.mobile-grid-100
-      - if @paused
-        %button#pause_button.greenbutton{ onclick: "window.location.href = '/experiment/resume'" } Resume
-      - else
-        %button#pause_button.orangebutton{ onclick: "window.location.href = '/experiment/pause'" } Pause
+      %button#resume_button.greenbutton{ onclick: "resumeExperiment();" } Resume
+      %button#pause_button.orangebutton{ onclick: "pauseExperiment();" } Pause
       %button#stop_button.redbutton{ onclick: "window.location.href = '/experiment/end'" } End
