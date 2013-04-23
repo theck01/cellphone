@@ -43,6 +43,11 @@ class AutoExpApp < Sinatra::Base
       stddev: stddev }.to_json
   end
 
+  # request logs as json
+  get '/api/logs' do
+    log_array.to_json
+  end
+
   # request manual dose be administered
   post '/api/manual_dose' do
     return nil if @@experiment_done

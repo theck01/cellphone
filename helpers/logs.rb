@@ -3,6 +3,12 @@ require 'sinatra/base'
 module Sinatra
   module Logs
 
+    @@logs = []
+
+    def log_array
+      @@logs
+    end
+
     # log params to the dose csv file
     def log_dose (params)
       log_hash = {
@@ -25,6 +31,14 @@ module Sinatra
           file.puts(log_hash.values.to_s[1..-2])
         end
       end
+
+      if log_hash[:administered]
+        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage administered"
+      elsif log_hash[:requested_automatically]
+        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage requested automatically"
+      elsif log_hash[:requested_manually]
+        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage requested manually"
+      end
     end
 
     # log string to the notes text file
@@ -32,6 +46,7 @@ module Sinatra
       File.open('./logs/notes.txt', 'a') do |file|
         file.puts '' << now << logstr.to_s
       end
+      @@logs << "#{now} - #{logstr}"
     end
 
     # log the experiment setup
@@ -52,5 +67,3 @@ module Sinatra
 
   helpers Logs
 end
-
-
