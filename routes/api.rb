@@ -56,6 +56,11 @@ class AutoExpApp < Sinatra::Base
     puts "Dose requested manually"
   end
 
+  # request that a note taken by the experimenter be saved
+  post '/api/note' do
+    log_note params[:note]
+  end
+
   # pause the current experiment
   post '/api/pause' do
     @@experiment_paused = true

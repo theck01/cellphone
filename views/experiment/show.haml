@@ -4,6 +4,7 @@
     = @title.to_s
   %h2#time_left.grid-33.mobile-grid-100 Time Left:
   %h2#state.grid-33.mobile-grid-100 Status:
+  .clear
 
   #chart_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
     #chart.grid-95.suffix-5mobile-grid-95.mobile-suffix-5
@@ -29,3 +30,10 @@
       %button#resume_button.greenbutton{ onclick: "resumeExperiment();" } Resume
       %button#pause_button.orangebutton{ onclick: "pauseExperiment();" } Pause
       %button#stop_button.redbutton{ onclick: "window.location.href = '/experiment/end'" } End
+  .clear
+  %br
+
+  #logs.grid-100.mobile-grid-100.grid-parent
+    %textarea#note_field.grid-50.prefix-10.mobile-grid-100{ type: 'text', name: 'note', rows: 3, cols: 80, placeholder: 'Enter a note here and save it with --->' }
+    #button_parent.grid-30.suffix-10.mobile-grid-100{ align: 'center' }
+      %button.greenbutton{ onclick: 'sendNote();' } Make Note

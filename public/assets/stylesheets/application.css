@@ -10,6 +10,11 @@ label{
   text-align: left;
 }
 
+textarea{
+  resize: none;
+  border-color: #BBBBBB;
+}
+
 .bluebutton{
 	-moz-box-shadow:inset -1px -1px 4px 0px #808080;
 	-webkit-box-shadow:inset -1px -1px 4px 0px #808080;

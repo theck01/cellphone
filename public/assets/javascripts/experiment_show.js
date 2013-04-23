@@ -14,6 +14,7 @@ function newArray(value, length) {
 /* JQuery variables for DOM */
 var $chart;
 var $cell_img;
+var $note_field;
 var $pause_button;
 var $resume_button;
 var $state_header;
@@ -44,6 +45,17 @@ function resumeExperiment() {
   });
   updateStatus();
   $resume_button.replaceWith($pause_button);
+}
+
+
+function sendNote(){
+  var note = $note_field.val();
+  $.ajax({
+    url: '/api/note',
+    type: 'POST',
+    data: { note: note }
+  });
+  $note_field.val('');
 }
 
 
@@ -169,6 +181,7 @@ function manualDose() {
 $(function () {
   $chart = $("#chart");
   $cell_img = $("#cell_img");
+  $note_field = $("#note_field");
   $pause_button = $("#pause_button");
   $resume_button = $("#resume_button");
   $state_header = $("#state");

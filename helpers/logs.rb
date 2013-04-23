@@ -44,7 +44,7 @@ module Sinatra
     # log string to the notes text file
     def log_note (logstr)
       File.open('./logs/notes.txt', 'a') do |file|
-        file.puts '' << now << logstr.to_s
+        file.puts '' << now << " - " << logstr.to_s
       end
       @@logs << "#{now} - #{logstr}"
     end
