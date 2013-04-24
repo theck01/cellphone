@@ -11,8 +11,9 @@ label{
 }
 
 textarea{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
   resize: none;
-  border-color: #BBBBBB;
 }
 
 .bluebutton{

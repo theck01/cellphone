@@ -45,7 +45,7 @@ class AutoExpApp < Sinatra::Base
 
   # request logs as html to include in show page
   get '/api/logs' do
-    partial 'partials/log_entries'.to_sym
+    log_array.reverse.join("\n\n")
   end
 
   # request manual dose be administered

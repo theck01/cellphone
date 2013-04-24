@@ -6,41 +6,43 @@
   %h2#state.grid-33.mobile-grid-100 Status:
   .clear
 
-  #chart_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent
-    #chart.grid-95.suffix-5mobile-grid-95.mobile-suffix-5
-    %p{ align: 'center' } Click and drag to zoom in on histogram.
+  #left_column.grid-33.mobile-grid-100.grid-parent
+    #chart_container.grid-95.suffix-5.mobile-grid-100.grid-parent
+      #chart.grid-100.mobile-grid-95.mobile-suffix-5
+      %p{ align: 'center' } Click and drag to zoom in on histogram.
 
-  #img_container.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
-    %img#cell_img.grid-100.mobile-grid-100(src="/assets/imgs/#{@start_img}")
-  .clear
+    #settings.grid-90.prefix-5.suffix-5.mobile-grid-60.mobile-prefix-35.mobile-suffix-5.grid-parent
+      %h3#values.grid-60.prefix-35.suffix-5.mobile-grid-100
+        = "Dosage (ul): #{@settings[:dosage]}"
+        %br
+        = "Syringe Size (ml): #{@settings[:syringe]}"
+        %br
+        = "Threshold: #{@settings[:threshold]}"
 
-  #settings.grid-40.prefix-5.suffix-5.mobile-grid-60.mobile-prefix-35.mobile-suffix-5.grid-parent
-    %h3#values.grid-60.prefix-35.suffix-5.mobile-grid-100
-      = "Dosage (ul): #{@settings[:dosage]}"
-      %br
-      = "Syringe Size (ml): #{@settings[:syringe]}"
-      %br
-      = "Threshold: #{@settings[:threshold]}"
+  #center_column.grid-33.mobile-grid-100.grid-parent
+    #img_container.grid-100.mobile-grid-100.grid-parent{ align: 'center' }
+      %img#cell_img.grid-100.mobile-grid-100(src="/assets/imgs/#{@start_img}")
+    %br
+    %br
 
-  #run_controls.grid-40.prefix-5.suffix-5.mobile-grid-100.grid-parent{ align: 'center' }
-    #left_settings.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %button#dose_button.purplebutton{ onclick: 'manualDose();' } Give Dose
-      %button#settings_button.bluebutton{ onclick: "window.location.href = '/experiment/settings'"} Settings
-    #right_settings.grid-40.prefix-5.suffix-5.mobile-grid-100
-      %button#resume_button.greenbutton{ onclick: "resumeExperiment();" } Resume
-      %button#pause_button.orangebutton{ onclick: "pauseExperiment();" } Pause
-      %button#stop_button.redbutton{ onclick: "window.location.href = '/experiment/end'" } End
-  .clear
-  %br
-  %br
+    #run_controls.grid-100.mobile-grid-100.grid-parent{ align: 'center' }
+      #left_settings.grid-50.mobile-grid-100
+        %button#dose_button.purplebutton{ onclick: 'manualDose();' } Give Dose
+        %button#settings_button.bluebutton{ onclick: "window.location.href = '/experiment/settings'"} Settings
+      #right_settings.grid-50.mobile-grid-100
+        %button#resume_button.greenbutton{ onclick: "resumeExperiment();" } Resume
+        %button#pause_button.orangebutton{ onclick: "pauseExperiment();" } Pause
+        %button#stop_button.redbutton{ onclick: "window.location.href = '/experiment/end'" } End
 
-  #notes.grid-100.mobile-grid-100.grid-parent
-    %textarea#note_field.grid-50.prefix-10.mobile-grid-100{ type: 'text', name: 'note', rows: 3, cols: 80, placeholder: 'Enter a note here and save it with --->' }
-    #button_parent.grid-30.suffix-10.mobile-grid-100{ align: 'center' }
-      %button.greenbutton{ onclick: 'sendNote();' } Save Note
-  .clear
-  %br
+  #right_column.grid-33.mobile-grid-100.grid-parent
+    %textarea#logarea.grid-90.prefix-5.suffix-5.mobile-grid-100{ type: 'text', name: 'log_container', cols: 80, placeholder: 'Experiment Logs' }
+    .clear
+    %br
+    %br
 
-  #log_area.grid-100.mobile-grid-100.grid-parent
-    %h3.grid-20.prefix-20.mobile-grid-100{ align: 'right' } Logs
-    #log_container.grid-60.mobile-grid-100
+    #notes.grid-95.prefix-5.mobile-grid-100.grid-parent
+      %textarea#note_field.grid-60.mobile-grid-100{ type: 'text', name: 'note', rows: 3, cols: 80, placeholder: 'Enter a note here and save it with --->' }
+      #button_parent.grid-40.mobile-grid-100{ align: 'center' }
+        %button.greenbutton{ onclick: 'sendNote();' } Save Note
+    .clear
+    %br

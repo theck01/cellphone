@@ -14,7 +14,7 @@ function newArray(value, length) {
 /* JQuery variables for DOM */
 var $chart;
 var $cell_img;
-var $log_container;
+var $logarea;
 var $note_field;
 var $pause_button;
 var $resume_button;
@@ -63,6 +63,12 @@ function sendNote(){
 
 function sizeChart(){
   $chart.height($chart.width()*0.75);
+}
+
+function sizeLogArea(){
+  var font_size = parseInt($logarea.css('font-size').match(/\d+/g));
+  var rows = Math.round(($logarea.width()*0.6)/font_size);
+  $logarea.attr('rows', rows);
 }
 
 
@@ -138,7 +144,6 @@ function updateData() {
   });
 
   /* request and update image histogram from server */
-  sizeChart();
   $.ajax({
     url: '/api/histogram', 
     dataType: 'json', 
@@ -158,16 +163,13 @@ function updateData() {
 function updateLogs() {
   $.ajax({
     url: '/api/logs',
-    dataType: 'html',
+    dataType: 'text',
     success: function (data) {
       console.log(data);
-      $log_container.empty();
-      $log_container.append(data);
+      $logarea.val(data);
     }
   });
 }
-
-
 
 
 /* request and update status and time left */
@@ -202,7 +204,7 @@ function manualDose() {
 $(function () {
   $chart = $("#chart");
   $cell_img = $("#cell_img");
-  $log_container = $("#log_container");
+  $logarea = $("#logarea");
   $note_field = $("#note_field");
   $pause_button = $("#pause_button");
   $resume_button = $("#resume_button");
@@ -220,6 +222,8 @@ $(function () {
     }
   });
 
+  sizeChart();
+  sizeLogArea();
   updateData();
   setInterval(updateData, 7500);
 });
