@@ -14,6 +14,7 @@ function newArray(value, length) {
 /* JQuery variables for DOM */
 var $chart;
 var $cell_img;
+var $log_container;
 var $note_field;
 var $pause_button;
 var $resume_button;
@@ -32,8 +33,8 @@ function pauseExperiment() {
     type: 'POST',
     async: false
   });
-  updateStatus();
   $pause_button.replaceWith($resume_button);
+  updateStatus();
 }
 
 
@@ -43,8 +44,8 @@ function resumeExperiment() {
     type: 'POST',
     async: false
   });
-  updateStatus();
   $resume_button.replaceWith($pause_button);
+  updateStatus();
 }
 
 
@@ -56,6 +57,7 @@ function sendNote(){
     data: { note: note }
   });
   $note_field.val('');
+  updateLogs();
 }
 
 
@@ -113,6 +115,7 @@ function updateChart(){
 }
 
 
+/* request refresh for most elements on the page */
 function updateData() {
 
   /* request and update most recent img path from server */
@@ -146,8 +149,25 @@ function updateData() {
     }
   });
 
+  updateLogs();
   updateStatus();
 }
+
+
+/* request and display logs up to this point */
+function updateLogs() {
+  $.ajax({
+    url: '/api/logs',
+    dataType: 'html',
+    success: function (data) {
+      console.log(data);
+      $log_container.empty();
+      $log_container.append(data);
+    }
+  });
+}
+
+
 
 
 /* request and update status and time left */
@@ -174,6 +194,7 @@ function manualDose() {
     type: 'POST',
     async: false
   });
+  updateLogs();
   updateStatus();
 }
 
@@ -181,6 +202,7 @@ function manualDose() {
 $(function () {
   $chart = $("#chart");
   $cell_img = $("#cell_img");
+  $log_container = $("#log_container");
   $note_field = $("#note_field");
   $pause_button = $("#pause_button");
   $resume_button = $("#resume_button");

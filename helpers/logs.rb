@@ -33,11 +33,11 @@ module Sinatra
       end
 
       if log_hash[:administered]
-        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage administered"
+        @@logs << "#{now} - dose size of #{log_hash[:dosage_ul]}ml administered"
       elsif log_hash[:requested_automatically]
-        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage requested automatically"
+        @@logs << "#{now} - dose size of #{log_hash[:dosage_ul]}ml dosage requested automatically"
       elsif log_hash[:requested_manually]
-        @@logs << "#{now} - #{log_hash[:dosage_ul]} dosage requested manually"
+        @@logs << "#{now} - dose size of #{log_hash[:dosage_ul]}ml dosage requested manually"
       end
     end
 

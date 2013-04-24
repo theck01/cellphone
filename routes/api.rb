@@ -43,9 +43,9 @@ class AutoExpApp < Sinatra::Base
       stddev: stddev }.to_json
   end
 
-  # request logs as json
+  # request logs as html to include in show page
   get '/api/logs' do
-    log_array.to_json
+    partial 'partials/log_entries'.to_sym
   end
 
   # request manual dose be administered

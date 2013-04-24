@@ -32,8 +32,15 @@
       %button#stop_button.redbutton{ onclick: "window.location.href = '/experiment/end'" } End
   .clear
   %br
+  %br
 
-  #logs.grid-100.mobile-grid-100.grid-parent
+  #notes.grid-100.mobile-grid-100.grid-parent
     %textarea#note_field.grid-50.prefix-10.mobile-grid-100{ type: 'text', name: 'note', rows: 3, cols: 80, placeholder: 'Enter a note here and save it with --->' }
     #button_parent.grid-30.suffix-10.mobile-grid-100{ align: 'center' }
-      %button.greenbutton{ onclick: 'sendNote();' } Make Note
+      %button.greenbutton{ onclick: 'sendNote();' } Save Note
+  .clear
+  %br
+
+  #log_area.grid-100.mobile-grid-100.grid-parent
+    %h3.grid-20.prefix-20.mobile-grid-100{ align: 'right' } Logs
+    #log_container.grid-60.mobile-grid-100
