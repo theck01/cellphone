@@ -25,7 +25,7 @@ To use cellphone you must be running a Windows computer connected to a microscop
 
 
 ## Run
-To run the experiment you must run two servers, one is the main application server and another is the image processing server. Start these servers with the commands:
+To run the experiment you must run two servers, one is the main application server and another is the image processing server. Start these servers with the commands (you will need to open two Cygwin windows to do so. Run the comands from the proper directory, one in each window):
     
     $ ./start_histogrammer.sh
     $ ./start_app.sh
