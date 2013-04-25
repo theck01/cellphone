@@ -73,6 +73,7 @@ GEM
       ripl-rack (>= 0.2.0)
       sinatra (>= 1.2.1)
     tzinfo (0.3.37)
+    zipruby (0.3.6)
 
 PLATFORMS
   ruby
@@ -90,3 +91,4 @@ DEPENDENCIES
   sqlite3
   thin
   tux
+  zipruby

@@ -10,6 +10,7 @@ gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
 gem 'sqlite3'
 gem 'thin'
+gem 'zipruby'
 
 group :development, :test do
   gem 'pry'

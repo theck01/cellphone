@@ -12,3 +12,6 @@ AutoExpApp.helpers Sinatra::ImageCapture
 
 require './helpers/logs'
 AutoExpApp.helpers Sinatra::Logs
+
+require './helpers/package'
+AutoExpApp.helpers Sinatra::Package
