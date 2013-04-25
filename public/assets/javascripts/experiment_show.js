@@ -54,6 +54,7 @@ function sendNote(){
   $.ajax({
     url: '/api/note',
     type: 'POST',
+    async: 'false',
     data: { note: note }
   });
   $note_field.val('');
@@ -137,6 +138,7 @@ function updateData() {
   /* request and update settings from server */
   $.ajax({
     url: '/api/settings',
+    async: 'false',
     dataType: 'json',
     success: function (data) {
       threshold = data['threshold'];

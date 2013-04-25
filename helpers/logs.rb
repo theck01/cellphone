@@ -12,7 +12,7 @@ module Sinatra
     # log params to the dose csv file
     def log_dose (params)
       log_hash = {
-        timestamp: now,
+        timestamp: datestamp,
         dosage_ul: 1,
         administered: false,
         requested_automatically: false,
@@ -33,20 +33,20 @@ module Sinatra
       end
 
       if log_hash[:administered]
-        @@logs << "#{now} - Dose size of #{log_hash[:dosage_ul]}ml administered"
+        @@logs << "#{timestamp} - Dose size of #{log_hash[:dosage_ul]}ml administered"
       elsif log_hash[:requested_automatically]
-        @@logs << "#{now} - Dose size of #{log_hash[:dosage_ul]}ml dosage requested automatically"
+        @@logs << "#{timestamp} - Dose size of #{log_hash[:dosage_ul]}ml dosage requested automatically"
       elsif log_hash[:requested_manually]
-        @@logs << "#{now} - Dose size of #{log_hash[:dosage_ul]}ml dosage requested manually"
+        @@logs << "#{timestamp} - Dose size of #{log_hash[:dosage_ul]}ml dosage requested manually"
       end
     end
 
     # log string to the notes text file
     def log_note (logstr)
       File.open('./logs/notes.txt', 'a') do |file|
-        file.puts '' << now << " - " << logstr.to_s
+        file.puts '' << datestamp << " - " << logstr.to_s
       end
-      @@logs << "#{now} - #{logstr}"
+      @@logs << "#{datestamp} - #{logstr}"
     end
 
     # log the experiment setup
@@ -60,8 +60,12 @@ module Sinatra
 
     protected
 
-    def now
+    def datestamp
       Time.now.strftime('%m-%d-%Y %I:%M:%S%p')
+    end
+
+    def timestamp
+      Time.now.strftime('%I:%M:%S%p')
     end
   end
 
