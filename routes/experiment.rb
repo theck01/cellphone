@@ -67,6 +67,12 @@ class AutoExpApp < Sinatra::Base
     redirect '/'
   end
 
+  # render the download results page
+  get '/experiment/results' do
+    @page = 'experiment/results'.to_sym
+    haml :layout
+  end
+
   #render the settings page
   get '/experiment/settings' do
     scripts :experiment_settings

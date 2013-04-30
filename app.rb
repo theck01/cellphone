@@ -40,8 +40,7 @@ class AutoExpApp < Sinatra::Base
     elsif @@img_thread
       redirect '/experiment/show' 
     else
-      @page = :index
-      haml :layout
+      redirect '/experiment/results'
     end
   end
 end
