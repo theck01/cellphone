@@ -1,4 +1,6 @@
 public/assets/imgs/*
 logs/*
 *.sq3
-results/*
+public/results/*
+.rvmrc
+

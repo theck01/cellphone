@@ -5,15 +5,17 @@ module Sinatra
   module Package
 
     def package_results (zipname)
-      generate_zipfile zipname
+      zippath = "public/results/#{zipname}.zip"
+      File.delete(zippath) if File.exists?(zippath)
+      generate_zipfile zippath
       cleanup
     end
 
     protected
 
     # generate a zipfile of all results
-    def generate_zipfile (filename)
-      Zip::Archive.open("results/#{filename}.zip", Zip::CREATE) do |ar|
+    def generate_zipfile (zippath)
+      Zip::Archive.open(zippath, Zip::CREATE) do |ar|
         Dir.glob('logs/histograms/*').each do |file|
           dest = File.join('histograms',File.basename(file));
           if !File.directory?(file)
