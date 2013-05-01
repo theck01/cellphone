@@ -1,4 +1,18 @@
-%h2
-  Download Results
-%p{ align: 'center' }
-  In the very near future there will be a download link here
+#grid-container.grid-30.prefix-35.suffix-35.mobile-grid-100.grid-parent
+  %h2
+    Experiment Complete!
+  %br
+  %p
+    Your results can be found on the server here:
+  %p{align: 'center'}
+    = File.join(Dir.pwd,'public','results',@zipname)
+  %br
+  %p
+    Or download them directly:
+  #download_button{ align: 'center' }
+    %button#download_button.greenbutton{ onclick: "location.href='/api/download_results'" } Download Results
+  %br
+  %br
+  %p To start another experiment you must restart the webserver. 
+    
+

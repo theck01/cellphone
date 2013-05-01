@@ -17,6 +17,12 @@ class AutoExpApp < Sinatra::Base
     { dose: dose.to_s, syringe_size: @@experiment_settings[:syringe].to_s }.to_json
   end
 
+  # request the results zip file
+  get  '/api/download_results' do
+    filename = "#{@@experiment_setup[:file_prefix]}.zip"
+    send_file "./public/results/#{filename}", filename: filename, type: 'application/zip', disposition: :attachment
+  end
+
   # request the histogram of the last saved image
   get '/api/histogram' do
     content_type :json

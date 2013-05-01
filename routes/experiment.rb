@@ -70,6 +70,7 @@ class AutoExpApp < Sinatra::Base
   # render the download results page
   get '/experiment/results' do
     @page = 'experiment/results'.to_sym
+    @zipname = "#{@@experiment_setup[:file_prefix]}.zip"
     haml :layout
   end
 
