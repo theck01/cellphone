@@ -15,10 +15,12 @@ class AutoExpApp < Sinatra::Base
   @@experiment_paused = false
   @@experiment_setup = { file_prefix: 'test' }
   @@experiment_settings = { 
-    dosage: 1.0, hours: 1.0, minutes: 0, syringe: 25.0, threshold: 0
+    dosage: 1.0, hours: 1.0, interdose: 30.0,
+    minutes: 0, syringe: 25.0, threshold: 0
   }
   @@img_prefix = 'test'
   @@img_thread = nil
+  @@prev_dose = nil
   @@recent_img_name = '.placeholder.jpg'
   @@syringe_size = 10 #ml, standard syringe
 

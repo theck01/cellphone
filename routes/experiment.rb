@@ -28,10 +28,17 @@ class AutoExpApp < Sinatra::Base
             file.puts @histogram.to_json
           end
 
+          # determine if new dose should be automatically administered
           avg = @histogram.each_with_index.map{ |x,i| x*i }.reduce(:+)
+          should_dose = avg < @@experiment_settings[:threshold] 
+          should_dose &&= !@@experiment_done
+          if @@prev_dose
+            should_dose &&= (Time.now - @@prev_dose) > @@experiment_settings[:interdose]
+          end
 
-          if avg < @@experiment_settings[:threshold] && !@@experiment_done
+          if should_dose
             @@dose = @@experiment_settings[:dosage]
+            @@prev_dose = Time.now
             puts "Drug dose for administration set automatically"
             log_dose dosage_ul: @@dose, requested_automatically: true
           end

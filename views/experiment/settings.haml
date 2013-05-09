@@ -36,6 +36,13 @@
     .clear
 
     %span.grid-100.mobile-grid-100.grid-parent
+      %label.grid-40.mobile-grid-100 Time Between Doses
+      %input#interdose_field.grid-25.grid-prefix-5.grid-suffix-5.mobile-grid-50.mobile-grid-prefix-5.mobile-grid-suffix-5{ type: 'text', name: 'interdose', value: @settings[:interdose] }
+      %label.grid-35.grid-prefix-5.grid-suffix-5.mobile-grid-50.mobile-grid-prefix-5.mobile-grid-suffix-5 Seconds
+    %br
+    .clear
+
+    %span.grid-100.mobile-grid-100.grid-parent
       %label.grid-25.mobile-grid-100 Threshold (pixel intensity)
       %input#threshold_field.grid-50.mobile-grid-100{ type: 'text', name: 'threshold', value: @settings[:threshold] }
     %br
