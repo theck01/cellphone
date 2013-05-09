@@ -9,9 +9,7 @@ function newArray(value, length) {
 }
 
 
-/* page wide access to most recent chart data */
-
-/* JQuery variables for DOM */
+/* JQuery variables for DOM updates */
 var $chart;
 var $cell_img;
 var $logarea;
@@ -27,6 +25,7 @@ var average_intensity = 128;
 var threshold = 128;
 
 
+/* send pause request to server and update affected elements */
 function pauseExperiment() {
   $.ajax({
     url: '/api/pause',
@@ -38,6 +37,7 @@ function pauseExperiment() {
 }
 
 
+/* send resume request to server and update affected elements */
 function resumeExperiment() {
   $.ajax({
     url: '/api/resume',
@@ -48,7 +48,7 @@ function resumeExperiment() {
   updateStatus();
 }
 
-
+/* send a user note to the server and update logs */
 function sendNote(){
   var note = $note_field.val();
   $.ajax({
@@ -62,17 +62,20 @@ function sendNote(){
 }
 
 
+/* resize the chart to current page size */
 function sizeChart(){
   $chart.height($chart.width()*0.75);
 }
 
+
+/* resize the logging area to current page size */
 function sizeLogArea(){
   var font_size = parseInt($logarea.css('font-size').match(/\d+/g));
   var rows = Math.round(($logarea.width()*0.6)/font_size);
   $logarea.attr('rows', rows);
 }
 
-
+/* update the contents of the chart */
 function updateChart(){
 
   x_labels = newArray("", 256);
@@ -100,7 +103,7 @@ function updateChart(){
           text: 'Threshold = ' + threshold, 
           rotation: 270, 
           x: 15,
-          y: 100
+          y: 60
         }
       },
       { 
@@ -111,7 +114,7 @@ function updateChart(){
           text: 'Average Intensity', 
           rotation: 270, 
           x: 15,
-          y: 100
+          y: 60
         }
       }]
     },
@@ -125,16 +128,6 @@ function updateChart(){
 /* request refresh for most elements on the page */
 function updateData() {
 
-  /* request and update most recent img path from server */
-  $.ajax({
-    url: '/api/recent_img', 
-    dataType: 'json', 
-    success: function (data) {
-      var img_path = data['path'];
-      $cell_img.attr("src", img_path);
-    }
-  });
-
   /* request and update settings from server */
   $.ajax({
     url: '/api/settings',
@@ -142,6 +135,16 @@ function updateData() {
     dataType: 'json',
     success: function (data) {
       threshold = data['threshold'];
+    }
+  });
+
+  /* request and update most recent img path from server */
+  $.ajax({
+    url: '/api/recent_img', 
+    dataType: 'json', 
+    success: function (data) {
+      var img_path = data['path'];
+      $cell_img.attr("src", img_path);
     }
   });
 
@@ -192,6 +195,7 @@ function updateStatus() {
 }
 
 
+/* manually set a dose on the server and update affected fields */
 function manualDose() {
   $.ajax({
     url: '/api/manual_dose',
@@ -233,5 +237,6 @@ $(function () {
 
 $(window).resize(function (event){
   sizeChart();
-  updateChart();
+  sizeLogArea();
+  updateData();
 });
