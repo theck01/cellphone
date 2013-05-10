@@ -66,9 +66,8 @@ class AutoExpApp < Sinatra::Base
     if @@img_thread
       @@img_thread.terminate
       @@img_thread = nil
+      package_results @@experiment_setup[:file_prefix]
     end
-    
-    package_results @@experiment_setup[:file_prefix]
 
     @@experiment_done = true
     redirect '/'
