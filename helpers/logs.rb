@@ -23,12 +23,12 @@ module Sinatra
 
       if File.exists?('./logs/doses.csv')
         File.open('./logs/doses.csv','a') do |file|
-          file.puts(log_hash.values.to_s[1..-2])
+          file.puts(log_hash.values.to_s[1..-2] + "\r")
         end
       else
         File.open('./logs/doses.csv','w') do |file|
-          file.puts("#" << log_hash.keys.to_s[1..-2])
-          file.puts(log_hash.values.to_s[1..-2])
+          file.puts("#" << log_hash.keys.to_s[1..-2] + "\r")
+          file.puts(log_hash.values.to_s[1..-2] + "\r")
         end
       end
 
@@ -44,7 +44,7 @@ module Sinatra
     # log string to the notes text file
     def log_note (logstr)
       File.open('./logs/notes.txt', 'a') do |file|
-        file.puts '' << datestamp << " - " << logstr.to_s
+        file.puts '' << datestamp << " - " << logstr.to_s << "\r"
       end
       @@logs << "#{datestamp} - #{logstr}"
     end
@@ -53,7 +53,7 @@ module Sinatra
     def log_setup (setup)
       File.open('./logs/setup.txt', 'w') do |file|
         [:name, :title, :description, :expectations].each do |k|
-          file.puts "#{k.capitalize}: #{setup[k]}"
+          file.puts "#{k.capitalize}: #{setup[k]}\r"
         end
       end
     end
