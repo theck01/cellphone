@@ -35,3 +35,7 @@ The application can be used by visiting the following address in your browser:
 130.78.84.73:4567
 
 If you are not a Tufts researcher you may need to change the IP addresses in the start\_app.sh script and start\_histogrammer.sh script to an address on your network.
+
+## Docs
+More detailed documentation can be found in the docs subdirectory in PDFs
+
