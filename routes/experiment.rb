@@ -1,5 +1,5 @@
 class AutoExpApp < Sinatra::Base
-  
+
   # start experiment, if one is not already running
   get '/experiment/begin' do
     unless @@img_thread || @@experiment_done
@@ -14,7 +14,7 @@ class AutoExpApp < Sinatra::Base
 
           # try to request histogram from image from histogrammer server
           begin
-            url = "http://#{settings.histogrammer_ip}:3000/api/histogram"
+            url = "http://#{settings.histogrammer_ip}:#{settings.histogrammer_port}/api/histogram"
             response = RestClient.get "#{url}/#{recent_img_name}"
             @histogram = JSON.parse(response.body)['histogram']
           rescue Errno::ECONNREFUSED
@@ -30,7 +30,7 @@ class AutoExpApp < Sinatra::Base
 
           # determine if new dose should be automatically administered
           avg = @histogram.each_with_index.map{ |x,i| x*i }.reduce(:+)
-          should_dose = avg < @@experiment_settings[:threshold] 
+          should_dose = avg < @@experiment_settings[:threshold]
           should_dose &&= !@@experiment_done
           if @@prev_dose
             should_dose &&= (Time.now - @@prev_dose) > @@experiment_settings[:interdose]
@@ -85,7 +85,7 @@ class AutoExpApp < Sinatra::Base
     scripts :experiment_settings
 
     time_diff = if @@experiment_done
-      0 
+      0
     elsif @@end_time
       @@end_time - Time.now
     else
@@ -114,7 +114,7 @@ class AutoExpApp < Sinatra::Base
     @page = 'experiment/setup'
     haml :layout
   end
-  
+
   # save values from the setup page
   post '/experiment/setup' do
     params.each{ |k,v| @@experiment_setup[k.to_sym] = v }
